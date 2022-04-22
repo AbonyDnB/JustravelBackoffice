@@ -25,6 +25,7 @@ export class CreateEstablishmentComponent implements OnInit {
   textES: boolean = true;
   textEN: boolean = false;
   textDE: boolean = false;
+  T: string[] = [];
 
   // Reactive form builder
   constructor(private fb: FormBuilder, private establishmentService: EstablishmentService) {
@@ -44,21 +45,43 @@ export class CreateEstablishmentComponent implements OnInit {
       descripcionDE:['', Validators.required],
       radioActive:['', Validators.required],
       recommended:false,
-      tags:this.tags,
-      aperturaLunes: '00:00',
-      aperturaMartes: '00:00',
-      aperturaMiercoles: '00:00',
-      aperturaJueves: '00:00',
-      aperturaViernes: '00:00',
-      aperturaSabado: '00:00',
-      aperturaDomingo: '00:00',
-      cierreLunes: '00:00',
-      cierreMartes: '00:00',
-      cierreMiercoles: '00:00',
-      cierreJueves: '00:00',
-      cierreViernes: '00:00',
-      cierreSabado: '00:00',
-      cierreDomingo: '00:00',
+      tags:this.tagCtrl,
+
+      aperturaMañanaLunes: '',
+      cierreMañanaLunes: '',
+      aperturaTardeLunes: '',
+      cierreTardeLunes: '',
+
+      aperturaMañanaMartes: '',
+      cierreMañanaMartes: '',
+      aperturaTardeMartes: '',
+      cierreTardeMartes: '',
+
+      aperturaMañanaMiercoles: '',
+      cierreMañanaMiercoles: '',
+      aperturaTardeMiercoles: '',
+      cierreTardeMiercoles: '',
+
+      aperturaMañanaJueves: '',
+      cierreMañanaJueves: '',
+      aperturaTardeJueves: '',
+      cierreTardeJueves: '',
+
+      aperturaMañanaViernes: '',
+      cierreMañanaViernes: '',
+      aperturaTardeViernes: '',
+      cierreTardeViernes: '',
+
+      aperturaMañanaSabado: '',
+      cierreMañanaSabado: '',
+      aperturaTardeSabado: '',
+      cierreTardeSabado: '',
+
+      aperturaMañanaDomingo: '',
+      cierreMañanaDomingo: '',
+      aperturaTardeDomingo: '',
+      cierreTardeDomingo: '',
+
       // ------------- INFORMACION FACTURACION -------------
       cf:['', Validators.required],
       razonSocial:['', Validators.required],
@@ -94,20 +117,41 @@ export class CreateEstablishmentComponent implements OnInit {
       descripcionES:this.establishmentForm.value.descripcionES,
       descripcionEN:this.establishmentForm.value.descripcionEN,
       descripcionDE:this.establishmentForm.value.descripcionDE,
-      aperturaLunes: this.establishmentForm.value.aperturaLunes,
-      aperturaMartes: this.establishmentForm.value.aperturaMartes,
-      aperturaMiercoles: this.establishmentForm.value.aperturaMiercoles,
-      aperturaJueves:this.establishmentForm.value.aperturaJueves,
-      aperturaViernes:this.establishmentForm.value.aperturaViernes,
-      aperturaSabado:this.establishmentForm.value.aperturaSabado,
-      aperturaDomingo:this.establishmentForm.value.aperturaDomingo,
-      cierreLunes:this.establishmentForm.value.cierreLunes,
-      cierreMartes:this.establishmentForm.value.cierreMartes,
-      cierreMiercoles:this.establishmentForm.value.cierreMiercoles,
-      cierreJueves:this.establishmentForm.value.cierreJueves,
-      cierreViernes:this.establishmentForm.value.cierreViernes,
-      cierreSabado:this.establishmentForm.value.cierreSabado,
-      cierreDomingo:this.establishmentForm.value.cierreDomingo,
+      // ------------- HORARIOS -------------
+      aperturaMañanaLunes: this.establishmentForm.value.aperturaMañanaLunes,
+      cierreMañanaLunes: this.establishmentForm.value.cierreMañanaLunes,
+      aperturaTardeLunes: this.establishmentForm.value.aperturaTardeLunes,
+      cierreTardeLunes: this.establishmentForm.value.cierreTardeLunes,
+
+      aperturaMañanaMartes: this.establishmentForm.value.aperturaMañanaMartes,
+      cierreMañanaMartes: this.establishmentForm.value.cierreMañanaMartes,
+      aperturaTardeMartes: this.establishmentForm.value.aperturaTardeMartes,
+      cierreTardeMartes: this.establishmentForm.value.cierreTardeMartes,
+
+      aperturaMañanaMiercoles: this.establishmentForm.value.aperturaMañanaMiercoles,
+      cierreMañanaMiercoles: this.establishmentForm.value.cierreMañanaMiercoles,
+      aperturaTardeMiercoles: this.establishmentForm.value.aperturaTardeMiercoles,
+      cierreTardeMiercoles: this.establishmentForm.value.cierreTardeMiercoles,
+
+      aperturaMañanaJueves: this.establishmentForm.value.aperturaMañanaJueves,
+      cierreMañanaJueves: this.establishmentForm.value.cierreMañanaJueves,
+      aperturaTardeJueves: this.establishmentForm.value.aperturaTardeJueves,
+      cierreTardeJueves: this.establishmentForm.value.cierreTardeJueves,
+
+      aperturaMañanaViernes: this.establishmentForm.value.aperturaMañanaViernes,
+      cierreMañanaViernes: this.establishmentForm.value.cierreMañanaViernes,
+      aperturaTardeViernes: this.establishmentForm.value.aperturaTardeViernes,
+      cierreTardeViernes: this.establishmentForm.value.cierreTardeViernes,
+
+      aperturaMañanaSabado: this.establishmentForm.value.aperturaMañanaSabado,
+      cierreMañanaSabado: this.establishmentForm.value.cierreMañanaSabado,
+      aperturaTardeSabado: this.establishmentForm.value.aperturaTardeSabado,
+      cierreTardeSabado: this.establishmentForm.value.cierreTardeSabado,
+
+      aperturaMañanaDomingo: this.establishmentForm.value.aperturaMañanaDomingo,
+      cierreMañanaDomingo: this.establishmentForm.value.cierreMañanaDomingo,
+      aperturaTardeDomingo: this.establishmentForm.value.aperturaTardeDomingo,
+      cierreTardeDomingo: this.establishmentForm.value.cierreTardeDomingo,
       // ------------- INFORMACION FACTURACION -------------
       cf:this.establishmentForm.value.cf,
       razonSocial:this.establishmentForm.value.razonSocial,
@@ -163,36 +207,20 @@ export class CreateEstablishmentComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl();
   filteredTags: Observable<string[]>;
-  tags: string[] = [];
-  allTags: string[] = ['Comida americana', 'Restaurante de carne'];
+  allTags: string[] = ['Comida americana', 'Restaurante de carne','Comida mexicana','Bebidas','Test'];
   @ViewChild('tagInput') tagInput!: ElementRef<HTMLInputElement>;
 
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-
-    // Add our tag
-    if (value) {
-      this.tags.push(value);
-    }
-
-    // Clear the input value
-    event.chipInput!.clear();
-
-    this.tagCtrl.setValue(null);
+  onTagRemoved(cat: string) {
+    const tags = this.tagCtrl.value as string[];
+    this.removeFirst(tags, cat);
+    this.tagCtrl.setValue(tags); // To trigger change detection
   }
 
-  remove(tag: string): void {
-    const index = this.tags.indexOf(tag);
-
-    if (index >= 0) {
-      this.tags.splice(index, 1);
+  private removeFirst<T>(array: T[], toRemove: T): void {
+    const index = array.indexOf(toRemove);
+    if (index !== -1) {
+      array.splice(index, 1);
     }
-  }
-
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.tags.push(event.option.viewValue);
-    this.tagInput.nativeElement.value = '';
-    this.tagCtrl.setValue(null);
   }
 
   private _filter(value: string): string[] {

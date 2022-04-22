@@ -2,9 +2,8 @@
   <mat-sidenav #sidenav mode="side">
     <app-sidebar></app-sidebar>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content style="background-color: rgb(240, 239, 255);">
     <app-header (toggleSideNav)="sidenav.toggle()"></app-header>
     <router-outlet></router-outlet>
-    <app-footer color="primary"></app-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
