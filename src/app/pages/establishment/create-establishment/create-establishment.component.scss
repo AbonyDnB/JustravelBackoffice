@@ -1,0 +1,58 @@
+.form-container {
+  margin:2rem;
+  // padding: 20px;
+}
+
+.radios_establecimiento_activo {
+  display: flex;
+  flex-direction:row;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.radio_establecimiento_activo {
+  margin: 2px;
+}
+
+.mg-left {
+  margin-left: 12px;
+}
+
+.check_recomended {
+  margin-left: 100px;
+  font-weight: bold;
+}
+
+.mg-top {
+  margin-top: 10px;
+}
+
+.titleContainer {
+  text-align: center;
+  margin-top: 20px;
+}
+.titleContainer h1 {
+  font-weight: bold;
+}
+
+label {
+  font-weight: bold
+}
+
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+}
+
+table th {
+  background-color: #1a2251;
+  color: #fff;
+  text-align: left;
+}
+
+table td , table th {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+

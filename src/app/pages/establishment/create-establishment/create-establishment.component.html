@@ -1,0 +1,339 @@
+<div class="container px-2">
+  <div class="ml-8 mt-6">
+    <p class="text-2xl md:text-3xl italic font-semibold tracking-wide">
+      CREAR ESTABLECIMIENTO
+    </p>
+  </div>
+  <div [formGroup]="establishmentForm" class="form-container">
+    <div class="flex flex-col">
+      <div class="flex flex-col md:flex-row">
+        <mat-form-field
+          appearance="outline"
+          color="accent"
+          class="w-full md:w-96"
+        >
+          <mat-label>Nombre establecimiento</mat-label>
+          <input formControlName="nombre" matInput />
+        </mat-form-field>
+        <mat-form-field
+          class="flex-initial md:w-32 w-full col-span-2 md:ml-8"
+          appearance="outline"
+          color="accent"
+        >
+          <mat-label>Precio sin pase</mat-label>
+          <input formControlName="precioSinPase" matInput />
+        </mat-form-field>
+      </div>
+      <div class="flex flex-col md:flex-row">
+        <div class="flex flex-col md:flex-row">
+          <mat-radio-group
+            aria-labelledby="label_establecimiento_activo"
+            class="radios_establecimiento_activo"
+          >
+            <mat-radio-button
+              *ngFor="let active of isActive"
+              [value]="active"
+              formControlName="radioActive"
+              name="radioActive"
+              ngDefaultControl
+              class="radio_establecimiento_activo"
+            >
+              {{ active }}
+            </mat-radio-button>
+          </mat-radio-group>
+          <mat-checkbox name="recommended" formControlName="recommended" class="md:ml-14" style="margin-top: 15px">
+            Recomendado por Justravel
+          </mat-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row mt-6 md:mt-0">
+      <div class="flex flex-col">
+        <mat-button-toggle-group
+          name="descripcionesBtns"
+          aria-label="Descripciones"
+          class="w-full md:w-32"
+        >
+          <mat-button-toggle (click)="textESFunction()" value="descripcionBtnES">ES</mat-button-toggle>
+          <mat-button-toggle (click)="textENFunction()" value="descripcionBtnEN">EN</mat-button-toggle>
+          <mat-button-toggle (click)="textDEFunction()" value="descripcionBtnDE">DE</mat-button-toggle>
+        </mat-button-toggle-group>
+        <button mat-raised-button color="primary" *ngIf="textEN" value="descripcionBtnDE">Traducir al inglés</button>
+        <button mat-raised-button color="primary" *ngIf="textDE" value="descripcionBtnDE">Traducir al alemán</button>
+        <mat-form-field
+          *ngIf="textES"
+          appearance="outline"
+          matInput
+          color="accent"
+          class="w-full md:w-96"
+        >
+          <mat-label>Descripciones</mat-label>
+          <textarea matInput rows="10" formControlName="descripcionES"></textarea>
+        </mat-form-field>
+        <mat-form-field
+          *ngIf="textEN"
+          appearance="outline"
+          matInput
+          color="accent"
+          class="w-full md:w-96"
+        >
+          <mat-label>Descripciones</mat-label>
+          <textarea matInput rows="10" formControlName="descripcionEN"></textarea>
+        </mat-form-field>
+        <mat-form-field
+          *ngIf="textDE"
+          appearance="outline"
+          matInput
+          color="accent"
+          class="w-full md:w-96"
+        >
+          <mat-label>Descripciones</mat-label>
+          <textarea matInput rows="10" formControlName="descripcionDE"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="md:ml-36">
+        <label>Horarios</label>
+        <table class="w-full">
+          <tr>
+            <th>Dia de la semana</th>
+            <th>Hora apertura</th>
+            <th>Hora cierre</th>
+          </tr>
+          <tr>
+            <td>Lunes</td>
+            <td><input type="time" formControlName="aperturaLunes" /></td>
+            <td><input type="time" formControlName="cierreLunes" /></td>
+          </tr>
+          <tr>
+            <td>Martes</td>
+            <td><input type="time" formControlName="aperturaMartes" /></td>
+            <td><input type="time" formControlName="cierreMartes" /></td>
+          </tr>
+          <tr>
+            <td>Miercoles</td>
+            <td><input type="time" formControlName="aperturaMiercoles" /></td>
+            <td><input type="time" formControlName="cierreMiercoles" /></td>
+          </tr>
+          <tr>
+            <td>Jueves</td>
+            <td><input type="time" formControlName="aperturaJueves" /></td>
+            <td><input type="time" formControlName="cierreJueves" /></td>
+          </tr>
+          <tr>
+            <td>Viernes</td>
+            <td><input type="time" formControlName="aperturaViernes" /></td>
+            <td><input type="time" formControlName="cierreViernes" /></td>
+          </tr>
+          <tr>
+            <td>Sabado</td>
+            <td><input type="time" formControlName="aperturaSabado" /></td>
+            <td><input type="time" formControlName="cierreSabado" /></td>
+          </tr>
+          <tr>
+            <td>Domingo</td>
+            <td><input type="time" formControlName="aperturaDomingo" /></td>
+            <td><input type="time" formControlName="cierreDomingo" /></td>
+          </tr>
+
+        </table>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row mt-6 md:mt-0">
+      <mat-form-field appearance="fill" color="accent" class="w-full md:w-96">
+        <mat-label>Tags establecimiento</mat-label>
+        <mat-chip-list #chipList aria-label="Tags establecimiento">
+          <mat-chip
+            color="accent"
+            *ngFor="let tag of tags"
+            (removed)="remove(tag)"
+          >
+            {{ tag }}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+          <input
+            placeholder="Añadir otro..."
+            #tagInput
+            formControlName="tags"
+            [formControl]="tagCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)"
+          />
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+            {{tag}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <div class="md:mt-12 md:ml-36">
+        <button mat-raised-button color="primary" class="w-full md:w-80">
+          Seleccionar imagen
+        </button>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row mt-6 md:mt-0">
+      <div class="flex flex-col mt-0 md:mt-6">
+        <h2>INFORMACIÓN FACTURACIÓN</h2>
+        <div class="flex flex-col md:flex-row">
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="w-full md:w-60"
+          >
+            <mat-label>CF</mat-label>
+            <input formControlName="cf" matInput />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="w-full md:w-60 md:ml-8"
+          >
+            <mat-label>Razón Social</mat-label>
+            <input formControlName="razonSocial" matInput />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="w-full md:w-60 md:ml-8"
+          >
+            <mat-label>Teléfono</mat-label>
+            <input formControlName="tlf" matInput />
+          </mat-form-field>
+        </div>
+        <div class="flex flex-col md:flex-row">
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="w-full md:w-60"
+          >
+            <mat-label>Localidad</mat-label>
+            <input formControlName="localidad" matInput />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="w-full md:w-80 md:ml-8"
+          >
+            <mat-label>Calle</mat-label>
+            <input formControlName="calle" matInput />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="w-full md:w-16 md:ml-8"
+          >
+            <mat-label>Nº</mat-label>
+            <input formControlName="numeroCalle" matInput />
+          </mat-form-field>
+        </div>
+        <div class="flex flex-col md:flex-row">
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="w-full md:w-36"
+          >
+            <mat-label>Código postal</mat-label>
+            <input formControlName="cPostal" matInput />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="w-full md:w-60 md:ml-8"
+          >
+            <mat-label>Email</mat-label>
+            <input type="email" formControlName="email" matInput />
+          </mat-form-field>
+          <mat-form-field
+          appearance="outline"
+          color="accent"
+          class="w-full md:w-80 md:ml-8"
+        >
+          <mat-label>IBAN</mat-label>
+          <input formControlName="iban" matInput />
+        </mat-form-field>
+        </div>
+      </div>
+      <div class="flex flex-col md:mt-6 md:ml-8">
+        <h2>INFORMACIÓN PARA EL CLIENTE</h2>
+        <div class="flex flex-col md:flex-row">
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="w-full md:w-60"
+          >
+            <mat-label>Localidad</mat-label>
+            <input formControlName="localidadCliente" matInput />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="w-full md:w-36 md:ml-8"
+          >
+            <mat-label>Código postal</mat-label>
+            <input formControlName="cpCliente" matInput />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="w-full md:w-80 md:ml-8"
+          >
+            <mat-label>Calle</mat-label>
+            <input formControlName="calleCliente" matInput />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="w-full md:w-16 md:ml-8"
+          >
+            <mat-label>nº</mat-label>
+            <input formControlName="nCalleCliente" matInput />
+          </mat-form-field>
+        </div>
+        <div class="flex flex-col md:flex-row">
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="w-full md:w-60"
+          >
+            <mat-label>Comunidad</mat-label>
+            <input formControlName="comunidadCliente" matInput />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="w-full md:w-60 md:ml-8"
+          >
+            <mat-label>Teléfono de reserva</mat-label>
+            <input formControlName="tlfCliente" matInput />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="w-full md:w-60 md:ml-8"
+          >
+            <mat-label>Email de reserva</mat-label>
+            <input type="email" formControlName="emailCliente" matInput />
+          </mat-form-field>
+        </div>
+        <div class="flex flex-col md:flex-row">
+          <mat-form-field appearance="outline" color="accent" class="w-full md:w-100">
+            <mat-label>Latitud</mat-label>
+            <input formControlName="latitudCliente" matInput />
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="accent" class="w-full md:w-100 md:ml-8">
+            <mat-label>Longitud</mat-label>
+            <input formControlName="longitudCliente" matInput />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="flex-col md:mt-6">
+      <button mat-raised-button color="primary" class="w-full md:w-80" (click)="createEstablishment()">CREAR</button>
+    </div>
+  </div>
+</div>
+
