@@ -14,6 +14,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import {MatStepperModule} from '@angular/material/stepper';
 
 const myModules = [
   MatToolbarModule,
@@ -30,7 +31,8 @@ const myModules = [
   MatChipsModule,
   MatAutocompleteModule,
   MatSelectModule,
-  MatInputModule
+  MatInputModule,
+  MatStepperModule
 ];
 
 @NgModule({

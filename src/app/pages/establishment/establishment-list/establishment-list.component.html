@@ -4,7 +4,7 @@
       <p
         class="text-1xl md:text-1xl italic font-semibold tracking-wide align-middle"
       >
-        CREAR SERVICIOS
+        ESTABLECIMIENTOS
       </p>
     </div>
   </mat-toolbar>
@@ -22,30 +22,26 @@
             <input matInput />
           </mat-form-field>
           <mat-form-field class="" color="accent" appearance="outline">
-            <mat-label>Por establecimiento</mat-label>
+            <mat-label>Por categoria</mat-label>
             <mat-select></mat-select>
           </mat-form-field>
           <mat-form-field class="" color="accent" appearance="outline">
-            <mat-label>Creado por</mat-label>
+            <mat-label>Por localidad</mat-label>
             <mat-select></mat-select>
           </mat-form-field>
           <mat-form-field class="" color="accent" appearance="outline">
             <mat-label>Tipo de vale</mat-label>
             <mat-select></mat-select>
           </mat-form-field>
-          <mat-form-field class="" color="accent" appearance="outline">
-            <mat-label>Fecha creacion</mat-label>
-            <input type="date" matInput />
-          </mat-form-field>
         </div>
         <div class="flex justify-end w-full">
           <button
             mat-raised-button
             color="primary"
-            [routerLink]="['/createService']"
+            [routerLink]="['/createEstablishment']"
           >
-            <span>Crear un servicio</span>
-            <mat-icon class="ml-2" color="accent">add</mat-icon>
+          <span>Crear un establecimiento</span>
+          <mat-icon class="ml-2" color="accent">add</mat-icon>
           </button>
         </div>
       </mat-toolbar>
@@ -65,32 +61,32 @@
             <th
               class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
             >
-              Establecimiento
+              Colaborador
             </th>
             <th
               class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
             >
-              Fecha creación
+              Estado
             </th>
             <th
               class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
             >
-              Creado por
+              Categoría
             </th>
             <th
               class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
             >
-              Tipo de vale
+              Localidad
             </th>
             <th
               class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
             >
-              Edit
+              Nº Servicios
             </th>
             <th
               class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
             >
-              Delete
+              Tipos de vales
             </th>
           </tr>
         </thead>

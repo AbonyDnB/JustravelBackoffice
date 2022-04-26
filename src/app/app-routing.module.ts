@@ -40,6 +40,7 @@ const routes: Routes = [
         (m) => m.CreateServiceModule
       ),
   },
+  { path: 'establishmentList', loadChildren: () => import('./pages/establishment/establishment-list/establishment-list.module').then(m => m.EstablishmentListModule) },
 ];
 
 @NgModule({
