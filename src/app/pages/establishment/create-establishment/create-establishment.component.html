@@ -1,424 +1,266 @@
 <div>
-  <mat-toolbar style="background: rgb(212, 212, 212)">
-    <div class="mt-4">
-      <p
-        class="text-1xl md:text-1xl italic font-semibold tracking-wide align-middle"
-      >
-        CREAR ESTABLECIMIENTO
-      </p>
-    </div>
-  </mat-toolbar>
+    <mat-toolbar style="background: rgb(212, 212, 212)">
+        <div class="mt-4">
+            <p class="text-1xl md:text-1xl italic font-semibold tracking-wide align-middle">
+                CREAR ESTABLECIMIENTO
+            </p>
+        </div>
+    </mat-toolbar>
 </div>
 <div class="container px-2">
-  <div class="ml-8"></div>
-  <div [formGroup]="establishmentForm" class="form-container">
-    <div class="flex flex-col">
-      <div class="flex flex-col md:flex-row">
-        <mat-form-field
-          appearance="outline"
-          color="accent"
-          class="w-full md:w-96"
-        >
-          <mat-label>Nombre establecimiento</mat-label>
-          <input formControlName="nombre" matInput />
-        </mat-form-field>
-        <mat-form-field
-          class="flex-initial md:w-32 w-full col-span-2 md:ml-8"
-          appearance="outline"
-          color="accent"
-        >
-          <mat-label>Precio sin pase</mat-label>
-          <input formControlName="precioSinPase" matInput />
-        </mat-form-field>
-        <div class="flex flex-col md:flex-row md:ml-8">
-          <mat-radio-group
-            aria-labelledby="label_establecimiento_activo"
-            class="radios_establecimiento_activo"
-          >
-            <mat-radio-button
-              *ngFor="let active of isActive"
-              [value]="active"
-              formControlName="radioActive"
-              name="radioActive"
-              ngDefaultControl
-              class="radio_establecimiento_activo"
-            >
-              {{ active }}
-            </mat-radio-button>
-          </mat-radio-group>
-          <mat-checkbox
-            name="recommended"
-            formControlName="recommended"
-            class="md:ml-14"
-            style="margin-top: 15px"
-          >
-            Recomendado por Justravel
-          </mat-checkbox>
+    <div class="ml-8"></div>
+    <div [formGroup]="establishmentForm" class="form-container">
+        <div class="flex flex-col">
+            <div class="flex flex-col md:flex-row">
+                <mat-form-field appearance="outline" color="accent" class="w-full md:w-96">
+                    <mat-label>Nombre establecimiento</mat-label>
+                    <input formControlName="nombre" matInput />
+                </mat-form-field>
+                <mat-form-field class="flex-initial md:w-32 w-full col-span-2 md:ml-8" appearance="outline" color="accent">
+                    <mat-label>Precio sin pase</mat-label>
+                    <input formControlName="precioSinPase" matInput />
+                </mat-form-field>
+                <div class="flex flex-col md:flex-row md:ml-8">
+                    <mat-radio-group aria-labelledby="label_establecimiento_activo" class="radios_establecimiento_activo">
+                        <mat-radio-button *ngFor="let active of isActive" [value]="active" formControlName="radioActive" name="radioActive" ngDefaultControl class="radio_establecimiento_activo">
+                            {{ active }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                    <mat-checkbox name="recommended" formControlName="recommended" class="md:ml-14" style="margin-top: 15px">
+                        Recomendado por Justravel
+                    </mat-checkbox>
+                </div>
+
+                <mat-form-field color="accent" class="w-full mt-2 md:w-96 md:ml-8">
+                    <mat-label>Selecciona tags:</mat-label>
+                    <mat-select [formControl]="tagCtrl" multiple class="h-8">
+                        <mat-option *ngFor="let tag of allTags" [value]="tag">
+                            {{ tag }}
+                        </mat-option>
+                        <mat-select-trigger>
+
+                        </mat-select-trigger>
+                    </mat-select>
+                    <mat-chip-list>
+                        <mat-chip *ngFor="let tag of tagCtrl.value" [removable]="true" (removed)="onTagRemoved(tag)" color="accent" selected>
+                            {{ tag }}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
+                </mat-form-field>
+            </div>
         </div>
-
-        <mat-form-field color="accent" class="w-full mt-2 md:w-96 md:ml-8">
-          <mat-label>Selecciona tags:</mat-label>
-          <mat-select [formControl]="tagCtrl" multiple class="h-8">
-            <mat-option *ngFor="let tag of allTags" [value]="tag">
-              {{ tag }}
-            </mat-option>
-            <mat-select-trigger>
-
-            </mat-select-trigger>
-          </mat-select>
-          <mat-chip-list>
-            <mat-chip
-              *ngFor="let tag of tagCtrl.value"
-              [removable]="true"
-              (removed)="onTagRemoved(tag)"
-              color="accent"
-              selected
-            >
-              {{ tag }}
-              <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-          </mat-chip-list>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="flex flex-col md:flex-row mt-6 md:mt-0">
-      <div class="flex flex-col md:w-2/4">
-        <mat-button-toggle-group
-          name="descripcionesBtns"
-          aria-label="Descripciones"
-          class="w-full md:w-32"
-        >
-          <mat-button-toggle (click)="textESFunction()" value="descripcionBtnES"
-            >ES</mat-button-toggle
-          >
-          <mat-button-toggle (click)="textENFunction()" value="descripcionBtnEN"
-            >EN</mat-button-toggle
-          >
-          <mat-button-toggle (click)="textDEFunction()" value="descripcionBtnDE"
-            >DE</mat-button-toggle
-          >
-        </mat-button-toggle-group>
-        <button
-          mat-raised-button
-          color="primary"
-          *ngIf="textEN"
-          value="descripcionBtnDE"
-        >
+        <div class="flex flex-col md:flex-row mt-6 md:mt-0">
+            <div class="flex flex-col md:w-2/4">
+                <mat-button-toggle-group name="descripcionesBtns" aria-label="Descripciones" class="w-full md:w-32">
+                    <mat-button-toggle (click)="textESFunction()" value="descripcionBtnES">ES</mat-button-toggle>
+                    <mat-button-toggle (click)="textENFunction()" value="descripcionBtnEN">EN</mat-button-toggle>
+                    <mat-button-toggle (click)="textDEFunction()" value="descripcionBtnDE">DE</mat-button-toggle>
+                </mat-button-toggle-group>
+                <button mat-raised-button color="primary" *ngIf="textEN" value="descripcionBtnDE">
           Traducir al inglés
         </button>
-        <button
-          mat-raised-button
-          color="primary"
-          *ngIf="textDE"
-          value="descripcionBtnDE"
-        >
+                <button mat-raised-button color="primary" *ngIf="textDE" value="descripcionBtnDE">
           Traducir al alemán
         </button>
-        <mat-form-field
-          *ngIf="textES"
-          appearance="outline"
-          matInput
-          color="accent"
-          class="w-full"
-        >
-          <mat-label>Descripciones</mat-label>
-          <textarea
-            matInput
-            rows="10"
-            formControlName="descripcionES"
-          ></textarea>
-        </mat-form-field>
-        <mat-form-field
-          *ngIf="textEN"
-          appearance="outline"
-          matInput
-          color="accent"
-          class="w-full"
-        >
-          <mat-label>Descripciones</mat-label>
-          <textarea
-            matInput
-            rows="10"
-            formControlName="descripcionEN"
-          ></textarea>
-        </mat-form-field>
-        <mat-form-field
-          *ngIf="textDE"
-          appearance="outline"
-          matInput
-          color="accent"
-          class="w-full"
-        >
-          <mat-label>Descripciones</mat-label>
-          <textarea
-            matInput
-            rows="10"
-            formControlName="descripcionDE"
-          ></textarea>
-        </mat-form-field>
-      </div>
-      <div class="md:ml-36">
-        <label>Horarios</label>
-        <table class="w-full">
-          <tr>
-            <th>Dia de la semana</th>
-            <th colspan="2">Mañana</th>
-            <th colspan="2">Tarde</th>
-          </tr>
-          <tr>
-            <td></td>
-            <td>Apertura</td>
-            <td>Cierre</td>
-            <td>Apertura</td>
-            <td>Cierre</td>
-          </tr>
-          <tr>
-            <td>Lunes</td>
-            <td><input type="time" formControlName="aperturaMañanaLunes" /></td>
-            <td><input type="time" formControlName="cierreMañanaLunes" /></td>
-            <td><input type="time" formControlName="aperturaTardeLunes" /></td>
-            <td><input type="time" formControlName="cierreTardeLunes" /></td>
-          </tr>
-          <tr>
-            <td>Martes</td>
-            <td>
-              <input type="time" formControlName="aperturaMañanaMartes" />
-            </td>
-            <td><input type="time" formControlName="cierreMañanaMartes" /></td>
-            <td><input type="time" formControlName="aperturaTardeMartes" /></td>
-            <td><input type="time" formControlName="cierreTardeMartes" /></td>
-          </tr>
-          <tr>
-            <td>Miercoles</td>
-            <td>
-              <input type="time" formControlName="aperturaMañanaMiercoles" />
-            </td>
-            <td>
-              <input type="time" formControlName="cierreMañanaMiercoles" />
-            </td>
-            <td>
-              <input type="time" formControlName="aperturaTardeMiercoles" />
-            </td>
-            <td>
-              <input type="time" formControlName="cierreTardeMiercoles" />
-            </td>
-          </tr>
-          <tr>
-            <td>Jueves</td>
-            <td>
-              <input type="time" formControlName="aperturaMañanaJueves" />
-            </td>
-            <td><input type="time" formControlName="cierreMañanaJueves" /></td>
-            <td><input type="time" formControlName="aperturaTardeJueves" /></td>
-            <td><input type="time" formControlName="cierreTardeJueves" /></td>
-          </tr>
-          <tr>
-            <td>Viernes</td>
-            <td>
-              <input type="time" formControlName="aperturaMañanaViernes" />
-            </td>
-            <td><input type="time" formControlName="cierreMañanaViernes" /></td>
-            <td>
-              <input type="time" formControlName="aperturaTardeViernes" />
-            </td>
-            <td><input type="time" formControlName="cierreTardeViernes" /></td>
-          </tr>
-          <tr>
-            <td>Sabado</td>
-            <td>
-              <input type="time" formControlName="aperturaMañanaSabado" />
-            </td>
-            <td><input type="time" formControlName="cierreMañanaSabado" /></td>
-            <td><input type="time" formControlName="aperturaTardeSabado" /></td>
-            <td><input type="time" formControlName="cierreTardeSabado" /></td>
-          </tr>
-          <tr>
-            <td>Domingo</td>
-            <td>
-              <input type="time" formControlName="aperturaMañanaDomingo" />
-            </td>
-            <td><input type="time" formControlName="cierreMañanaDomingo" /></td>
-            <td>
-              <input type="time" formControlName="aperturaTardeDomingo" />
-            </td>
-            <td><input type="time" formControlName="cierreTardeDomingo" /></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <div class="flex flex-col md:flex-row mt-6 md:mt-0">
-      <div class="flex flex-col mt-0 md:mt-6">
-        <h2>INFORMACIÓN FACTURACIÓN</h2>
-        <div class="flex flex-col md:flex-row">
-          <mat-form-field
-            appearance="outline"
-            color="accent"
-            class="w-full md:w-60"
-          >
-            <mat-label>CF</mat-label>
-            <input formControlName="cf" matInput />
-          </mat-form-field>
-          <mat-form-field
-            appearance="outline"
-            color="accent"
-            class="w-full md:w-60 md:ml-8"
-          >
-            <mat-label>Razón Social</mat-label>
-            <input formControlName="razonSocial" matInput />
-          </mat-form-field>
-          <mat-form-field
-            appearance="outline"
-            color="accent"
-            class="w-full md:w-60 md:ml-8"
-          >
-            <mat-label>Teléfono</mat-label>
-            <input formControlName="tlf" matInput />
-          </mat-form-field>
+                <mat-form-field *ngIf="textES" appearance="outline" matInput color="accent" class="w-full">
+                    <mat-label>Descripciones</mat-label>
+                    <textarea matInput rows="10" formControlName="descripcionES"></textarea>
+                </mat-form-field>
+                <mat-form-field *ngIf="textEN" appearance="outline" matInput color="accent" class="w-full">
+                    <mat-label>Descripciones</mat-label>
+                    <textarea matInput rows="10" formControlName="descripcionEN"></textarea>
+                </mat-form-field>
+                <mat-form-field *ngIf="textDE" appearance="outline" matInput color="accent" class="w-full">
+                    <mat-label>Descripciones</mat-label>
+                    <textarea matInput rows="10" formControlName="descripcionDE"></textarea>
+                </mat-form-field>
+            </div>
+            <div class="md:ml-36">
+                <label>Horarios</label>
+                <table class="w-full">
+                    <tr>
+                        <th>Dia de la semana</th>
+                        <th colspan="2">Mañana</th>
+                        <th colspan="2">Tarde</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Apertura</td>
+                        <td>Cierre</td>
+                        <td>Apertura</td>
+                        <td>Cierre</td>
+                    </tr>
+                    <tr>
+                        <td>Lunes</td>
+                        <td><input type="time" formControlName="aperturaMañanaLunes" /></td>
+                        <td><input type="time" formControlName="cierreMañanaLunes" /></td>
+                        <td><input type="time" formControlName="aperturaTardeLunes" /></td>
+                        <td><input type="time" formControlName="cierreTardeLunes" /></td>
+                    </tr>
+                    <tr>
+                        <td>Martes</td>
+                        <td>
+                            <input type="time" formControlName="aperturaMañanaMartes" />
+                        </td>
+                        <td><input type="time" formControlName="cierreMañanaMartes" /></td>
+                        <td><input type="time" formControlName="aperturaTardeMartes" /></td>
+                        <td><input type="time" formControlName="cierreTardeMartes" /></td>
+                    </tr>
+                    <tr>
+                        <td>Miercoles</td>
+                        <td>
+                            <input type="time" formControlName="aperturaMañanaMiercoles" />
+                        </td>
+                        <td>
+                            <input type="time" formControlName="cierreMañanaMiercoles" />
+                        </td>
+                        <td>
+                            <input type="time" formControlName="aperturaTardeMiercoles" />
+                        </td>
+                        <td>
+                            <input type="time" formControlName="cierreTardeMiercoles" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Jueves</td>
+                        <td>
+                            <input type="time" formControlName="aperturaMañanaJueves" />
+                        </td>
+                        <td><input type="time" formControlName="cierreMañanaJueves" /></td>
+                        <td><input type="time" formControlName="aperturaTardeJueves" /></td>
+                        <td><input type="time" formControlName="cierreTardeJueves" /></td>
+                    </tr>
+                    <tr>
+                        <td>Viernes</td>
+                        <td>
+                            <input type="time" formControlName="aperturaMañanaViernes" />
+                        </td>
+                        <td><input type="time" formControlName="cierreMañanaViernes" /></td>
+                        <td>
+                            <input type="time" formControlName="aperturaTardeViernes" />
+                        </td>
+                        <td><input type="time" formControlName="cierreTardeViernes" /></td>
+                    </tr>
+                    <tr>
+                        <td>Sabado</td>
+                        <td>
+                            <input type="time" formControlName="aperturaMañanaSabado" />
+                        </td>
+                        <td><input type="time" formControlName="cierreMañanaSabado" /></td>
+                        <td><input type="time" formControlName="aperturaTardeSabado" /></td>
+                        <td><input type="time" formControlName="cierreTardeSabado" /></td>
+                    </tr>
+                    <tr>
+                        <td>Domingo</td>
+                        <td>
+                            <input type="time" formControlName="aperturaMañanaDomingo" />
+                        </td>
+                        <td><input type="time" formControlName="cierreMañanaDomingo" /></td>
+                        <td>
+                            <input type="time" formControlName="aperturaTardeDomingo" />
+                        </td>
+                        <td><input type="time" formControlName="cierreTardeDomingo" /></td>
+                    </tr>
+                </table>
+            </div>
         </div>
-        <div class="flex flex-col md:flex-row">
-          <mat-form-field
-            appearance="outline"
-            color="accent"
-            class="w-full md:w-60"
-          >
-            <mat-label>Localidad</mat-label>
-            <input formControlName="localidad" matInput />
-          </mat-form-field>
-          <mat-form-field
-            appearance="outline"
-            color="accent"
-            class="w-full md:w-80 md:ml-8"
-          >
-            <mat-label>Calle</mat-label>
-            <input formControlName="calle" matInput />
-          </mat-form-field>
-          <mat-form-field
-            appearance="outline"
-            color="accent"
-            class="w-full md:w-16 md:ml-8"
-          >
-            <mat-label>Nº</mat-label>
-            <input formControlName="numeroCalle" matInput />
-          </mat-form-field>
+        <div class="flex flex-col md:flex-row mt-6 md:mt-0 w-full">
+            <div class="flex flex-col mt-0 md:mt-6">
+                <h2>INFORMACIÓN FACTURACIÓN</h2>
+                <div class="flex flex-col md:flex-row">
+                    <mat-form-field appearance="outline" color="accent" class="w-full md:w-60">
+                        <mat-label>CF</mat-label>
+                        <input formControlName="cf" matInput />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" color="accent" class="w-full md:w-60 md:ml-8">
+                        <mat-label>Razón Social</mat-label>
+                        <input formControlName="razonSocial" matInput />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" color="accent" class="w-full md:w-60 md:ml-8">
+                        <mat-label>Teléfono</mat-label>
+                        <input formControlName="tlf" matInput />
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col md:flex-row">
+                    <mat-form-field appearance="outline" color="accent" class="w-full md:w-60">
+                        <mat-label>Localidad</mat-label>
+                        <input formControlName="localidad" matInput />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" color="accent" class="w-full md:w-80 md:ml-8">
+                        <mat-label>Calle</mat-label>
+                        <input formControlName="calle" matInput />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" color="accent" class="w-full md:w-16 md:ml-8">
+                        <mat-label>Nº</mat-label>
+                        <input formControlName="numeroCalle" matInput />
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col md:flex-row">
+                    <mat-form-field appearance="outline" color="accent" class="w-full md:w-36">
+                        <mat-label>Código postal</mat-label>
+                        <input formControlName="cPostal" matInput />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" color="accent" class="w-full md:w-60 md:ml-8">
+                        <mat-label>Email</mat-label>
+                        <input type="email" formControlName="email" matInput />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" color="accent" class="w-full md:w-80 md:ml-8">
+                        <mat-label>IBAN</mat-label>
+                        <input formControlName="iban" matInput />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="flex flex-col md:mt-6 md:ml-8">
+                <h2>INFORMACIÓN PARA EL CLIENTE</h2>
+                <div class="flex flex-col md:flex-row">
+                    <mat-form-field appearance="outline" color="accent" class="w-full md:w-60">
+                        <mat-label>Localidad</mat-label>
+                        <input formControlName="localidadCliente" matInput />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" color="accent" class="w-full md:w-32 md:ml-8">
+                        <mat-label>Código postal</mat-label>
+                        <input formControlName="cpCliente" matInput />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" color="accent" class="w-full md:w-80 md:ml-8">
+                        <mat-label>Calle</mat-label>
+                        <input formControlName="calleCliente" matInput />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" color="accent" class="w-full md:w-16 md:ml-8">
+                        <mat-label>nº</mat-label>
+                        <input formControlName="nCalleCliente" matInput />
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col md:flex-row">
+                    <mat-form-field appearance="outline" color="accent" class="w-full md:w-60">
+                        <mat-label>Comunidad</mat-label>
+                        <input formControlName="comunidadCliente" matInput />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" color="accent" class="w-full md:w-60 md:ml-8">
+                        <mat-label>Teléfono de reserva</mat-label>
+                        <input formControlName="tlfCliente" matInput />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" color="accent" class="w-full md:w-60 md:ml-8">
+                        <mat-label>Email de reserva</mat-label>
+                        <input type="email" formControlName="emailCliente" matInput />
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col md:flex-row">
+                    <mat-form-field appearance="outline" color="accent" class="w-full md:w-100">
+                        <mat-label>Latitud</mat-label>
+                        <input formControlName="latitudCliente" matInput />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" color="accent" class="w-full md:w-100 md:ml-8">
+                        <mat-label>Longitud</mat-label>
+                        <input formControlName="longitudCliente" matInput />
+                    </mat-form-field>
+                </div>
+            </div>
         </div>
-        <div class="flex flex-col md:flex-row">
-          <mat-form-field
-            appearance="outline"
-            color="accent"
-            class="w-full md:w-36"
-          >
-            <mat-label>Código postal</mat-label>
-            <input formControlName="cPostal" matInput />
-          </mat-form-field>
-          <mat-form-field
-            appearance="outline"
-            color="accent"
-            class="w-full md:w-60 md:ml-8"
-          >
-            <mat-label>Email</mat-label>
-            <input type="email" formControlName="email" matInput />
-          </mat-form-field>
-          <mat-form-field
-            appearance="outline"
-            color="accent"
-            class="w-full md:w-80 md:ml-8"
-          >
-            <mat-label>IBAN</mat-label>
-            <input formControlName="iban" matInput />
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="flex flex-col md:mt-6 md:ml-8">
-        <h2>INFORMACIÓN PARA EL CLIENTE</h2>
-        <div class="flex flex-col md:flex-row">
-          <mat-form-field
-            appearance="outline"
-            color="accent"
-            class="w-full md:w-60"
-          >
-            <mat-label>Localidad</mat-label>
-            <input formControlName="localidadCliente" matInput />
-          </mat-form-field>
-          <mat-form-field
-            appearance="outline"
-            color="accent"
-            class="w-full md:w-36 md:ml-8"
-          >
-            <mat-label>Código postal</mat-label>
-            <input formControlName="cpCliente" matInput />
-          </mat-form-field>
-          <mat-form-field
-            appearance="outline"
-            color="accent"
-            class="w-full md:w-80 md:ml-8"
-          >
-            <mat-label>Calle</mat-label>
-            <input formControlName="calleCliente" matInput />
-          </mat-form-field>
-          <mat-form-field
-            appearance="outline"
-            color="accent"
-            class="w-full md:w-16 md:ml-8"
-          >
-            <mat-label>nº</mat-label>
-            <input formControlName="nCalleCliente" matInput />
-          </mat-form-field>
-        </div>
-        <div class="flex flex-col md:flex-row">
-          <mat-form-field
-            appearance="outline"
-            color="accent"
-            class="w-full md:w-60"
-          >
-            <mat-label>Comunidad</mat-label>
-            <input formControlName="comunidadCliente" matInput />
-          </mat-form-field>
-          <mat-form-field
-            appearance="outline"
-            color="accent"
-            class="w-full md:w-60 md:ml-8"
-          >
-            <mat-label>Teléfono de reserva</mat-label>
-            <input formControlName="tlfCliente" matInput />
-          </mat-form-field>
-          <mat-form-field
-            appearance="outline"
-            color="accent"
-            class="w-full md:w-60 md:ml-8"
-          >
-            <mat-label>Email de reserva</mat-label>
-            <input type="email" formControlName="emailCliente" matInput />
-          </mat-form-field>
-        </div>
-        <div class="flex flex-col md:flex-row">
-          <mat-form-field
-            appearance="outline"
-            color="accent"
-            class="w-full md:w-100"
-          >
-            <mat-label>Latitud</mat-label>
-            <input formControlName="latitudCliente" matInput />
-          </mat-form-field>
-          <mat-form-field
-            appearance="outline"
-            color="accent"
-            class="w-full md:w-100 md:ml-8"
-          >
-            <mat-label>Longitud</mat-label>
-            <input formControlName="longitudCliente" matInput />
-          </mat-form-field>
-        </div>
-      </div>
-    </div>
-    <div class="flex-col md:mt-6">
-      <button
-        mat-raised-button
-        color="primary"
-        class="w-full md:w-80"
-        (click)="createEstablishment()"
-      >
+        <div class="flex-col md:mt-6">
+            <button mat-raised-button color="primary" class="w-full md:w-80" (click)="createEstablishment()">
         CREAR
       </button>
+        </div>
     </div>
-  </div>
 </div>
