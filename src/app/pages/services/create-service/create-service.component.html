@@ -1,141 +1,263 @@
 <div>
-  <mat-toolbar style="background: rgb(212, 212, 212)">
-    <div class="mt-4">
-      <p
-        class="text-1xl md:text-1xl italic font-semibold tracking-wide align-middle"
-      >
-        Crear servicios
-      </p>
-    </div>
-  </mat-toolbar>
+    <mat-toolbar style="background: rgb(212, 212, 212)">
+        <div class="mt-4">
+            <p class="text-1xl md:text-1xl italic font-semibold tracking-wide align-middle">
+                Crear servicios
+            </p>
+        </div>
+    </mat-toolbar>
 </div>
 
 <div class="ml-10 mt-6 mb-6">
-  <p class="text-2xl md:text-2xl font-bold tracking-wide">
-    ¿Qué servicio quieres crear ?
-  </p>
+    <p class="text-2xl md:text-2xl font-bold tracking-wide">
+        ¿Qué servicio quieres crear ?
+    </p>
 </div>
 
 <mat-stepper #stepper>
-  <mat-step>
-  <!-- <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required."> -->
-    <form>
-    <!-- <form [formGroup]="firstFormGroup"> -->
-      <ng-template matStepLabel>Selecciona un servicio</ng-template>
-<div class="flex flex-row">
-  <div class="grid grid-rows-3 grid-flow-col gap-8 ml-12">
-    <div>
-      <button mat-fab color="primary">
+    <mat-step>
+        <!-- <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required."> -->
+        <form>
+            <!-- <form [formGroup]="firstFormGroup"> -->
+            <ng-template matStepLabel>Selecciona un servicio</ng-template>
+            <div class="flex flex-row">
+                <div class="grid grid-rows-3 grid-flow-col gap-8 ml-12">
+                    <div>
+                        <button mat-fab color="primary">
         <img
           class="w-28 ml-4"
           src="../../assets/images/imgServices/icon-food-red.png"
         />
       </button>
-      <p class="text-center font-bold text-lg">Comida</p>
-    </div>
-    <div>
-      <button mat-fab color="primary">
+                        <p class="text-center font-bold text-lg">Comida</p>
+                    </div>
+                    <div>
+                        <button mat-fab color="primary">
         <img
           class="w-28 ml-4"
           src="../../assets/images/imgServices/icon-food-red-premium.png"
         />
       </button>
-      <p class="text-center font-bold text-lg">Comida Premium</p>
-    </div>
-    <div>
-      <button mat-fab color="primary">
+                        <p class="text-center font-bold text-lg">Comida Premium</p>
+                    </div>
+                    <div>
+                        <button mat-fab color="primary">
         <img
           class="w-28 ml-4"
           src="../../assets/images/imgServices/ico-food-kids.png"
         />
       </button>
-      <p class="text-center font-bold text-lg">Comida Niños</p>
-    </div>
-  </div>
-  <div class="grid grid-rows-3 grid-flow-col gap-8 ml-12">
-    <div>
-      <button mat-fab color="primary">
+                        <p class="text-center font-bold text-lg">Comida Niños</p>
+                    </div>
+                </div>
+                <div class="grid grid-rows-3 grid-flow-col gap-8 ml-12">
+                    <div>
+                        <button mat-fab color="primary">
         <img
           class="w-28 ml-4"
           src="../../assets/images/imgServices/ico-drink.png"
         />
       </button>
-      <p class="text-center font-bold text-lg">Bebida</p>
-    </div>
-    <div>
-      <button mat-fab color="primary">
+                        <p class="text-center font-bold text-lg">Bebida</p>
+                    </div>
+                    <div>
+                        <button mat-fab color="primary">
         <img
           class="w-28 ml-4"
           src="../../assets/images/imgServices/ico-drink-premium.png"
         />
       </button>
-      <p class="text-center font-bold text-lg">Bebida Premium</p>
-    </div>
-    <div></div>
-  </div>
-  <div class="grid grid-rows-3 grid-flow-col gap-8 ml-12">
-    <div>
-      <button mat-fab color="primary">
+                        <p class="text-center font-bold text-lg">Bebida Premium</p>
+                    </div>
+                    <div></div>
+                </div>
+                <div class="grid grid-rows-3 grid-flow-col gap-8 ml-12">
+                    <div>
+                        <button mat-fab color="primary">
         <img
           class="w-28 ml-4"
           src="../../assets/images/imgServices/ico-coffe.png"
         />
       </button>
-      <p class="text-center font-bold text-lg">Desayuno</p>
-    </div>
-    <div></div>
-    <div></div>
-  </div>
-  <div class="grid grid-rows-3 grid-flow-col gap-8 ml-12">
-    <div>
-      <button mat-fab color="primary">
+                        <p class="text-center font-bold text-lg">Desayuno</p>
+                    </div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div class="grid grid-rows-3 grid-flow-col gap-8 ml-12">
+                    <div>
+                        <button mat-fab color="primary">
         <img
           class="w-28 ml-4"
           src="../../assets/images/imgServices/ico-kayak.png"
         />
       </button>
-      <p class="text-center font-bold text-lg">Actividad</p>
-    </div>
-    <div>
-      <button mat-fab color="primary">
+                        <p class="text-center font-bold text-lg">Actividad</p>
+                    </div>
+                    <div>
+                        <button mat-fab color="primary">
         <img
           class="w-28 ml-4"
           src="../../assets/images/imgServices/ico-kayak-kids.png"
         />
       </button>
-      <p class="text-center font-bold text-lg">Actividad Niños</p>
-    </div>
-  </div>
-</div>
-      <div>
-        <p>Go to a different step to see the error state</p>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step errorMessage="Address is required.">
-  <!-- <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required."> -->
-    <form>
-    <!-- <form [formGroup]="secondFormGroup"> -->
-      <ng-template matStepLabel>Especificaciones</ng-template>
-      <mat-form-field appearance="fill">
-        <mat-label>Address</mat-label>
-        <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="secondCtrl"
-               required>
-      </mat-form-field>
-      <div>
-        <p>Go to a different step to see the error state</p>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Crear servicio</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
+                        <p class="text-center font-bold text-lg">Actividad Niños</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button mat-button matStepperNext>Siguiente</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step errorMessage="Address is required.">
+        <!-- <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required."> -->
+        <form class="form-container">
+            <!-- <form [formGroup]="secondFormGroup"> -->
+            <ng-template matStepLabel>Especificaciones</ng-template>
+            <div class="flex flex-col">
+                <div class="flex flex-col md:flex-row">
+                    <div class="flex flex-col md:flex-row md:ml-8 md:mt-4">
+                        <mat-radio-group aria-labelledby="label_establecimiento_activo">
+                            <mat-radio-button *ngFor="let active of isActiveComida" [value]="active" formControlName="radioActive" name="radioActive" ngDefaultControl class="md:ml-2">
+                                {{ active }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                        <mat-checkbox name="recommended" formControlName="recommended" class="md:ml-14">
+                            Recomendado por Justravel
+                        </mat-checkbox>
+                    </div>
+                    <mat-form-field appearance="outline" color="accent" class="md:w-30 md:ml-10">
+                        <mat-label>Remuneración IVA incluido</mat-label>
+                        <input formControlName="remuneracionIva" matInput />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" color="accent" class="md:w-30 md:ml-10">
+                        <mat-label>Tipo IVA</mat-label>
+                        <input formControlName="ivaType" matInput />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" color="accent" class="md:w-30 md:ml-10">
+                        <mat-label>Establecimiento asociado</mat-label>
+                        <mat-select>
+                            <mat-option *ngFor="let establishment of establishments" [value]="establishment">
+                                {{ establishment }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col md:flex-row mt-6 md:mt-0">
+                    <div class="flex flex-col">
+                        <mat-label>Idioma</mat-label>
+                        <mat-button-toggle-group name="nombreServiciosBtns" aria-label="Nombre del servicio" class="w-full md:w-32">
+                            <mat-button-toggle (click)="textESFunction()" value="nombreServicioBtnES">ES</mat-button-toggle>
+                            <mat-button-toggle (click)="textENFunction()" value="nombreServicioBtnEN">EN</mat-button-toggle>
+                            <mat-button-toggle (click)="textDEFunction()" value="nombreServicioBtnDE">DE</mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                </div>
+                <div class="md:mt-4">
+                    <h2 *ngIf="textES">Editando en <strong class="text-orange-500">Español</strong></h2>
+                    <h2 *ngIf="textEN">Editando en <strong class="text-orange-500">Ingles</strong></h2>
+                    <h2 *ngIf="textDE">Editando en <strong class="text-orange-500">Alemán</strong></h2>
+                </div>
+                <div class="md:mt-4">
+                    <h1>Descripcion del servicio</h1>
+                </div>
+                <div class="flex flex-col md:flex-row mt-6 md:mt-0">
+                    <mat-form-field *ngIf="textES" appearance="outline" matInput color="accent" class="w-full md:w-52">
+                        <mat-label>Nombre del servicio</mat-label>
+                        <input matInput formControlName="nombreServicioES" />
+                    </mat-form-field>
+                    <mat-form-field *ngIf="textEN" appearance="outline" matInput color="accent" class="w-full md:w-52">
+                        <mat-label>Nombre del servicio</mat-label>
+                        <input matInput formControlName="nombreServicioEN" />
+                    </mat-form-field>
+                    <mat-form-field *ngIf="textDE" appearance="outline" matInput color="accent" class="w-full md:w-52">
+                        <mat-label>Nombre del servicio</mat-label>
+                        <input matInput formControlName="nombreServicioDE" />
+                    </mat-form-field>
+
+                    <mat-form-field *ngIf="textES" appearance="outline" matInput color="accent" class="w-full md:w-96 md:ml-10">
+                        <mat-label>Info adicional para clientes</mat-label>
+                        <input matInput formControlName="aditionalInfoES">
+                    </mat-form-field>
+                    <mat-form-field *ngIf="textEN" appearance="outline" matInput color="accent" class="w-full md:w-96 md:ml-10">
+                        <mat-label>Info adicional para clientes</mat-label>
+                        <input matInput formControlName="aditionalInfoEN">
+                    </mat-form-field>
+                    <mat-form-field *ngIf="textDE" appearance="outline" matInput color="accent" class="w-full md:w-96 md:ml-10">
+                        <mat-label>Info adicional para clientes</mat-label>
+                        <input matInput formControlName="aditionalInfoDE">
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col md:flex-row mt-6 md:mt-0">
+                    <mat-form-field *ngIf="textES" appearance="outline" matInput color="accent" class="w-full md:w-96">
+                        <mat-label>Entrantes a elegir</mat-label>
+                        <input matInput formControlName="entrantesES">
+                    </mat-form-field>
+                    <mat-form-field *ngIf="textEN" appearance="outline" matInput color="accent" class="w-full md:w-96">
+                        <mat-label>Entrantes a elegir</mat-label>
+                        <input matInput formControlName="entrantesEN">
+                    </mat-form-field>
+                    <mat-form-field *ngIf="textDE" appearance="outline" matInput color="accent" class="w-full md:w-96">
+                        <mat-label>Entrantes a elegir</mat-label>
+                        <input matInput formControlName="entrantesDE">
+                    </mat-form-field>
+
+                    <mat-form-field *ngIf="textES" appearance="outline" matInput color="accent" class="w-full md:w-96 md:ml-10">
+                        <mat-label>Principales a elegir *</mat-label>
+                        <input matInput formControlName="principalesES">
+                    </mat-form-field>
+                    <mat-form-field *ngIf="textEN" appearance="outline" matInput color="accent" class="w-full md:w-96 md:ml-10">
+                        <mat-label>Principales a elegir *</mat-label>
+                        <input matInput formControlName="principalesEN">
+                    </mat-form-field>
+                    <mat-form-field *ngIf="textDE" appearance="outline" matInput color="accent" class="w-full md:w-96 md:ml-10">
+                        <mat-label>Principales a elegir *</mat-label>
+                        <input matInput formControlName="principalesDE">
+                    </mat-form-field>
+
+                    <mat-form-field *ngIf="textES" appearance="outline" matInput color="accent" class="w-full md:w-96 md:ml-10">
+                        <mat-label>Postres a elegir *</mat-label>
+                        <input matInput formControlName="postresES">
+                    </mat-form-field>
+                    <mat-form-field *ngIf="textEN" appearance="outline" matInput color="accent" class="w-full md:w-96 md:ml-10">
+                        <mat-label>Postres a elegir *</mat-label>
+                        <input matInput formControlName="postresEN">
+                    </mat-form-field>
+                    <mat-form-field *ngIf="textDE" appearance="outline" matInput color="accent" class="w-full md:w-96 md:ml-10">
+                        <mat-label>Postres a elegir *</mat-label>
+                        <input matInput formControlName="postresDE">
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col md:flex-row mt-6 md:mt-0">
+                    <h1>Tags del servicio</h1>
+                    <div class="flex flex-col md:ml-10">
+                        <mat-label>Requiere reserva</mat-label>
+                        <mat-radio-group class="mt-2" aria-labelledby="label_establecimiento_activo">
+                            <mat-radio-button *ngFor="let requiere of requiereReserva" [value]="requiere" formControlName="requiereReserva" name="requiereReserva" ngDefaultControl class="md:ml-2">
+                                {{ requiere }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <mat-form-field appearance="outline" matInput color="accent" class="w-full md:w-52 md:ml-10">
+                        <mat-label>Días de antelación reserva</mat-label>
+                        <input matInput formControlName="antelacionReserva">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div>
+                <button mat-button mat-raised-button color="primary" class="w-full md:w-36 md:ml-10" matStepperPrevious>Atrás</button>
+                <button mat-button mat-raised-button color="primary" class="w-full md:w-36 md:ml-10">Previsualizar menú</button>
+                <button mat-button mat-raised-button color="primary" class="w-full md:w-36 md:ml-10" matStepperNext>Crear comida</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Crear servicio</ng-template>
+        <p>You are now done.</p>
+        <div>
+            <button mat-button matStepperPrevious>Atrás</button>
+            <button mat-button (click)="stepper.reset()">Reiniciar</button>
+        </div>
+    </mat-step>
 </mat-stepper>
