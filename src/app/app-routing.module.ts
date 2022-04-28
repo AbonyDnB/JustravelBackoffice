@@ -41,6 +41,8 @@ const routes: Routes = [
       ),
   },
   { path: 'establishmentList', loadChildren: () => import('./pages/establishment/establishment-list/establishment-list.module').then(m => m.EstablishmentListModule) },
+  { path: 'clientList', loadChildren: () => import('./pages/client/client-list/client-list.module').then(m => m.ClientListModule) },
+  { path: 'ventas', loadChildren: () => import('./pages/ventas/ventas.module').then(m => m.VentasModule) },
 ];
 
 @NgModule({
